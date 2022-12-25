@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+    <title>Animated Input Radio CSs</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Ubuntu', sans-serif;
+            font-weight: 600;
+            color: var(--light);
+
+        }
+        :root{
+            --primary_color : #5352ed;
+            --white:#ffffff;
+            --light : #d2dae2;
+            --bg : #21232e;
+        }
+        ::before,::after{
+            box-sizing: border-box;
+        }
+        .outer{
+            background-color: var(--bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container ul li input{
+            display: none;
+        }
+        .container ul li{
+            position: relative;
+            width: 220px;
+            height: 50px;
+            margin-bottom: 15px;
+            list-style: none;
+        }
+        .container ul li label{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 0 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+        .container ul li label::before{
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 2px solid transparent;
+            border-radius: 7px;
+            z-index: 1;
+            transform: scale(1);
+            transition: border .3s, transform .3s;
+        }
+        .container ul li input:checked + label::before{
+            border-color: var(--primary_color);
+            background-color: rgba(0, 0, 255, 0.1);
+            z-index: 2;
+            box-shadow: 0 0px 15px blue;
+            animation: scaleborder .3s forwards cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        .text{
+            color: rgb(2555,2555,2555,0.7);
+            transition: 0.4s all ease-in-out;
+        }
+        @keyframes scaleborder {
+            50%{
+                transform: scale(1.05);
+            }
+        }
+        .container ul li input:checked + label .text{
+            color: rgb(2555,2555,2555,1);
+        }
+        .container ul li label .circle{
+            width: 22px;
+            height: 22px;
+            border: 1px solid var(--white);
+            border-radius: 50%;
+            background: linear-gradient(145deg,black,grey);
+            transition: 0.2s all ease-in-out;
+        }
+        .container ul li input:checked + label .circle{
+            border: 5px solid var(--primary_color);
+            background: var(--white);
+            animation: scaledot .5s forwards cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        @keyframes scaledot {
+            50%{
+                transform: scale(1.25);
+            }
+
+        }
+        .container ul li label .fireworks{
+            position: absolute;
+            left: 38px;
+            transform: scale(0);
+        }
+        .container ul li label .fireworks::before,.container ul li label .fireworks::after{
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 4px;
+            height: 4px;
+            box-shadow: 0 -25px 0 0 #ff8080,
+                        25px 0 0 0 #a4ff80,
+                        0 25px 0 0 #ffed80,
+                        -25px 0 0 0 #a480ff,
+                        12px -13px 0 0 #80c8ff,
+                        25px 25px 0 0 #ff80ed,
+                        -13px 12px 0 0 #80ffc8,
+                        -25px -25px 0 0 #ffed80;
+            border-radius: 50%;
+            z-index: 10;
+        }
+        .container ul li label .fireworks::after{
+            width: 2px;
+            height: 2px;
+            transform: rotate(112deg);
+        }
+        .container ul li input:checked + label .fireworks{
+            animation: spread 2s forwards;
+            will-change: box-shadow;
+        }
+        @keyframes spread {
+            0%, 10%{
+                transform: scale(0);
+            }
+            25%{
+                transform: scale(1.2) rotate(40deg);
+            }
+            50%{
+                transform: scale(1.2) rotate(40deg) skewX(-25deg);
+            }
+        }
+        .container ul li input:checked + label .fireworks::before,
+        .container ul li input:checked + label .fireworks::after{
+            width: 0;;
+            height: 0;
+            transition: width .3s .4s, height .3s .4s;
+        }
+    </style>
+</head>
+<body>
+    <div class="outer">
+        <div class="container">
+            <ul>
+                <li>
+                    <input type="radio" name="option" id="design">
+                    <label for="design">
+                        <span class="circle"></span>
+                        <span class="fireworks"></span>
+                        <span class="text">Web Design</span>
+                    </label>
+                </li>
+                <li>
+                    <input type="radio" name="option" id="developer">
+                    <label for="developer">
+                        <span class="circle"></span>
+                        <span class="fireworks"></span>
+                        <span class="text">Web Developer</span>
+                    </label>
+                </li>
+                <li>
+                    <input type="radio" name="option" id="uiux">
+                    <label for="uiux">
+                        <span class="circle"></span>
+                        <span class="fireworks"></span>
+                        <span class="text">UI / UX</span>
+                    </label>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
